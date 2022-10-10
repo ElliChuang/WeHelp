@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8">
+        <title>Week_4_home</title>
+    </head>
+    <style>
+        .welcome{
+            max-width:500px;
+            padding:30px;
+            margin:auto;
+            background-color:#002d66;
+            border-style:solid;
+            border-color:#002d66;
+            color:white;
+            text-align:center;  
+            font-size:25px;
+        }
+        .group{
+            flex:none;
+            max-width:500px;
+            padding:30px;
+            margin:auto;
+            text-align:center;  
+            border-style:none solid solid solid;
+            border-color:#e7e5e3;
+    
+        }
+        .login{
+            font-size:20px;
+            font-weight:bold;
+            margin-bottom:5px;
+        }
+        .form{
+            margin:8px;
+            border-style:solid;
+            border-color:#999999;
+        }
+
+    </style>
+    <body>
+        <h3 class="welcome">歡迎光臨，請輸入帳號密碼</h3>
+        <div class="group">
+            <div class="login">登入系統</div>
+            <form action="/signin" , method="POST">
+                帳號<input class="form" type="text" name="account_name"/>
+                <br/>
+                密碼<input class="form" type="text" name="secret_code"/>
+                <br/>
+                <button class="form">登入</button>
+            </form>
+            <hr/>
+            <div class="login">計算整數平方根</div>
+            <form action="/submit">
+                正整數<input class="form" type="text" name="number"/>
+                <br/>
+                <button class="form">計算</button>
+            </form>
+        </div>
+    </body>
+</html>
