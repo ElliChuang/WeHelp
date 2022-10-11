@@ -41,7 +41,7 @@ def member():
 # 建立路徑 /error 對應的處理函式
 @app.route("/error")
 def error():
-    notes = request.args.get("message")
+    notes = request.args.get("message","")
     return render_template("error.html", data = notes)
 
 # 建立路徑 /signout 對應的處理函式
