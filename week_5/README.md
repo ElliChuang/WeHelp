@@ -112,10 +112,40 @@ time datetime not null default current_timestamp);
    ```
    ![5-3](https://user-images.githubusercontent.com/111445341/196478461-454217f6-a80b-4359-a2a8-6bf0fa66bbf6.png)
 
+###額外練習
+1. 自由使用任何方式設計資料庫，創建資料庫contentlike。
+   ```mysql
+   create table contentlike(
+   id bigint primary key auto_increment,
+   content_id bigint not null,
+   foreign key (content_id) references message(id),
+   username varchar(255) not null);
+   ```
+   ![6-1](https://user-images.githubusercontent.com/111445341/196733835-ac6051c5-1917-4154-9f2b-de4fdfffc5f4.png)
+   ![6-2](https://user-images.githubusercontent.com/111445341/196734039-ba8d9eb7-0906-4576-b453-3d06b2255dc6.png)
    
+2. insert data
+   ```mysql
+   insert into contentlike(content_id,username) values(1,'Claire');
+   insert into contentlike(content_id,username) values(1,'Max');
+   insert into contentlike(content_id,username) values(2,'Alen');
+   insert into contentlike(content_id,username) values(5,'Alen');
+   insert into contentlike(content_id,username) values(1,'Ivy');
+   insert into contentlike(content_id,username) values(1,'Ivy');
+   ```
+   ![6-3](https://user-images.githubusercontent.com/111445341/196734735-cb65d935-9454-482e-b778-edaf4eef2cc6.png)
    
-   
+3. 可以根據留言編號取得該留言有哪些會員按讚，取的留言編號1有哪些會員按讚。
+   ```mysql
+   select distinct content_id, username from contentlike where content_id = 1;
+   ```
+   ![6-4](https://user-images.githubusercontent.com/111445341/196735639-f3f2b505-bdb1-4474-8a0e-b44923e5d626.png)
 
+4. 要能先檢查是否曾經按過讚，然後才將按讚的數量 +1 並且記錄按讚的會員是誰。
+   ```mysql
+   select content_id,count(distinct username) from contentlike group by content_id;
+   ```
+   ![6-5](https://user-images.githubusercontent.com/111445341/196736245-6ef8d567-2d21-4432-91f3-9e112ebb6998.png)
 
    
    
