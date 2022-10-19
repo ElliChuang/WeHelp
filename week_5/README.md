@@ -112,7 +112,7 @@ time datetime not null default current_timestamp);
    ```
    ![5-3](https://user-images.githubusercontent.com/111445341/196478461-454217f6-a80b-4359-a2a8-6bf0fa66bbf6.png)
 
-###額外練習
+### 額外練習
 1. 自由使用任何方式設計資料庫，創建資料庫contentlike。
    ```mysql
    create table contentlike(
@@ -143,7 +143,7 @@ time datetime not null default current_timestamp);
 
 4. 要能先檢查是否曾經按過讚，然後才將按讚的數量 +1 並且記錄按讚的會員是誰。
    ```mysql
-   select content_id,count(distinct username) from contentlike group by content_id;
+   select content_id, count(distinct username) from contentlike group by content_id;
    ```
    ![6-5](https://user-images.githubusercontent.com/111445341/196736245-6ef8d567-2d21-4432-91f3-9e112ebb6998.png)
 
