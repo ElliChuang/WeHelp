@@ -135,7 +135,7 @@ time datetime not null default current_timestamp);
    ```
    ![6-3](https://user-images.githubusercontent.com/111445341/196734735-cb65d935-9454-482e-b778-edaf4eef2cc6.png)
    
-3. 可以根據留言編號取得該留言有哪些會員按讚，ex.取的留言編號1有哪些會員按讚。
+3. 可以根據留言編號取得該留言有哪些會員按讚，ex.取得留言編號1有哪些會員按讚。
    ```mysql
    select distinct content_id, username from contentlike where content_id = 1;
    ```
