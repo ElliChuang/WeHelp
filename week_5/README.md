@@ -124,7 +124,7 @@ time datetime not null default current_timestamp);
    ```
    ![6-1](https://user-images.githubusercontent.com/111445341/196944583-80bf250f-a705-402b-bdbc-d8723bc48fd2.png)
    
-2. insert data，要能先檢查是否曾經按過讚，然後才將按讚的數量 +1 並且記錄按讚的會員是誰。 
+2. insert data 
    ```mysql
    insert into likes(content_id,username) values(3,'Claire');
    insert into likes(message_id,username) values(3,'Max');
@@ -137,13 +137,13 @@ time datetime not null default current_timestamp);
    ```
    ![6-2](https://user-images.githubusercontent.com/111445341/196945265-8166567e-cc22-42a1-a177-1ad1ef8bc3d8.png)
    
-   重複輸入第二則訊息被Ivy按讚，出現無法輸入訊息
+3. 要能先檢查是否曾經按過讚，然後才將按讚的數量 +1 並且記錄按讚的會員是誰。重覆輸入第二則訊息被Ivy按讚，出現無法輸入訊息。
    ```mysql
    insert into likes(message_id,username) values(2,'Ivy');
    ```
    ![6-3](https://user-images.githubusercontent.com/111445341/196945884-64bc50d9-226f-4e0c-8ace-faff9d434f53.png)
    
-3. 可以根據留言編號取得該留言有哪些會員按讚，ex.取得留言編號3有哪些會員按讚。
+4. 可以根據留言編號取得該留言有哪些會員按讚，ex.取得留言編號3有哪些會員按讚。
    ```mysql
    select likes.username 
    from likes
