@@ -137,7 +137,7 @@ time datetime not null default current_timestamp);
    ```
    ![6-2](https://user-images.githubusercontent.com/111445341/196945265-8166567e-cc22-42a1-a177-1ad1ef8bc3d8.png)
    
-3. 要能先檢查是否曾經按過讚，然後才將按讚的數量 +1 並且記錄按讚的會員是誰。重覆輸入第二則訊息被Ivy按讚，出現無法輸入訊息。
+3. 要能先檢查是否曾經按過讚，然後才將按讚的數量 +1 並且記錄按讚的會員是誰。重覆輸入留言編號2被Ivy按讚，出現無法輸入訊息。
    ```mysql
    insert into likes(message_id,username) values(2,'Ivy');
    ```
