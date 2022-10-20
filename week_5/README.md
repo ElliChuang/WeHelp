@@ -119,7 +119,7 @@ time datetime not null default current_timestamp);
       message_id bigint not null, 
       username varchar(255) not null, 
       foreign key(message_id) references message(id),
-      constraint pk_like primary key (message_id,username)
+      constraint pk_likes primary key (message_id,username)
    );
    ```
    ![6-1](https://user-images.githubusercontent.com/111445341/196944583-80bf250f-a705-402b-bdbc-d8723bc48fd2.png)
