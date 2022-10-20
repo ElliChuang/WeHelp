@@ -113,43 +113,60 @@ time datetime not null default current_timestamp);
    ![5-3](https://user-images.githubusercontent.com/111445341/196478461-454217f6-a80b-4359-a2a8-6bf0fa66bbf6.png)
 
 ### 額外練習
-1. 自由使用任何方式設計資料庫，創建資料庫contentlike。
+1. 自由使用任何方式設計資料庫，創建table likes。
    ```mysql
-   create table contentlike(
-   id bigint primary key auto_increment,
-   content_id bigint not null,
-   foreign key (content_id) references message(id),
-   username varchar(255) not null);
+   create table likes(
+      message_id bigint not null, 
+      username varchar(255) not null, 
+      foreign key(message_id) references message(id),
+      constraint pk_like primary key (message_id,username)
+   );
    ```
-   ![6-1](https://user-images.githubusercontent.com/111445341/196733835-ac6051c5-1917-4154-9f2b-de4fdfffc5f4.png)
-   ![6-2](https://user-images.githubusercontent.com/111445341/196734039-ba8d9eb7-0906-4576-b453-3d06b2255dc6.png)
+   ![6-1](https://user-images.githubusercontent.com/111445341/196944583-80bf250f-a705-402b-bdbc-d8723bc48fd2.png)
    
-2. insert data
+2. insert data，要能先檢查是否曾經按過讚，然後才將按讚的數量 +1 並且記錄按讚的會員是誰。 
    ```mysql
-   insert into contentlike(content_id,username) values(1,'Claire');
-   insert into contentlike(content_id,username) values(1,'Max');
-   insert into contentlike(content_id,username) values(2,'Alen');
-   insert into contentlike(content_id,username) values(5,'Alen');
-   insert into contentlike(content_id,username) values(1,'Ivy');
-   insert into contentlike(content_id,username) values(1,'Ivy');
+   insert into likes(content_id,username) values(3,'Claire');
+   insert into likes(message_id,username) values(3,'Max');
+   insert into likes(message_id,username) values(3,'Alen');
+   insert into likes(message_id,username) values(3,'Ivy');
+   insert into likes(message_id,username) values(3,'Ian');
+   insert into likes(message_id,username) values(5,'Ian');
+   insert into likes(message_id,username) values(2,'Ivy');
+   insert into likes(message_id,username) values(7,'Alen');
    ```
-   ![6-3](https://user-images.githubusercontent.com/111445341/196734735-cb65d935-9454-482e-b778-edaf4eef2cc6.png)
+   ![6-2](https://user-images.githubusercontent.com/111445341/196945265-8166567e-cc22-42a1-a177-1ad1ef8bc3d8.png)
    
-3. 可以根據留言編號取得該留言有哪些會員按讚，ex.取得留言編號1有哪些會員按讚。
+   重複輸入第二則訊息被Ivy按讚，出現無法輸入訊息
    ```mysql
-   select distinct content_id, username from contentlike where content_id = 1;
+   insert into likes(message_id,username) values(2,'Ivy');
    ```
-   ![6-4](https://user-images.githubusercontent.com/111445341/196735639-f3f2b505-bdb1-4474-8a0e-b44923e5d626.png)
+   ![6-3](https://user-images.githubusercontent.com/111445341/196945884-64bc50d9-226f-4e0c-8ace-faff9d434f53.png)
+   
+3. 可以根據留言編號取得該留言有哪些會員按讚，ex.取得留言編號3有哪些會員按讚。
+   ```mysql
+   select likes.username 
+   from likes
+   inner join message on message.id = likes.message_id
+   where message.id = 3;
+   ```
+   ![6-4](https://user-images.githubusercontent.com/111445341/196946594-e5121d05-c199-4fa4-bf29-c35abbe02551.png)
 
-4. 要能先檢查是否曾經按過讚，然後才將按讚的數量 +1 並且記錄按讚的會員是誰。
+   取得留言的按讚數量
    ```mysql
-   select content_id, count(distinct username) from contentlike group by content_id;
+   select message_id,count(message_id) 
+   from likes 
+   group by message_id;
+   ``` 
+   ![6-5](https://user-images.githubusercontent.com/111445341/196947275-a48a5c32-c01f-4953-835b-67009dc46f5c.png)
+
+   取得留言的按讚數量及留言的內容
+   ```mysql
+   select likes.message_id,count(likes.message_id),message.content 
+   from likes 
+   inner join message on message.id=likes.message_id 
+   group by message_id;
    ```
-   ![6-5](https://user-images.githubusercontent.com/111445341/196736245-6ef8d567-2d21-4432-91f3-9e112ebb6998.png)
+   ![6-6](https://user-images.githubusercontent.com/111445341/196947640-e93b1d07-3776-4a22-80f8-8d1b30a4c249.png)
 
-   
-   
-   
-
-   
    
