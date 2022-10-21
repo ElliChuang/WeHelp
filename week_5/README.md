@@ -115,42 +115,52 @@ time datetime not null default current_timestamp);
 ### 額外練習
 1. 自由使用任何方式設計資料庫，創建table likes。
    ```mysql
-   create table likes(
+   create table likes( 
       message_id bigint not null, 
-      username varchar(255) not null, 
-      foreign key(message_id) references message(id),
-      constraint pk_likes primary key (message_id,username)
+      member_id bigint not null, 
+      foreign key(message_id) references message(id), 
+      foreign key(member_id) references member(id), 
+      constraint pk_likes primary key (message_id,member_id));
    );
    ```
-   ![6-1](https://user-images.githubusercontent.com/111445341/196944583-80bf250f-a705-402b-bdbc-d8723bc48fd2.png)
+   ![6-1(修)](https://user-images.githubusercontent.com/111445341/197185177-55884b99-d7be-46eb-972a-7aa8287bc2af.png)
    
 2. insert data 
    ```mysql
-   insert into likes(content_id,username) values(3,'Claire');
-   insert into likes(message_id,username) values(3,'Max');
-   insert into likes(message_id,username) values(3,'Alen');
-   insert into likes(message_id,username) values(3,'Ivy');
-   insert into likes(message_id,username) values(3,'Ian');
-   insert into likes(message_id,username) values(5,'Ian');
-   insert into likes(message_id,username) values(2,'Ivy');
-   insert into likes(message_id,username) values(7,'Alen');
+   insert into likes(message_id,member_id) values(2,6);
+   insert into likes(message_id,member_id) values(3,5);
+   insert into likes(message_id,member_id) values(3,3);
+   insert into likes(message_id,member_id) values(3,7);
+   insert into likes(message_id,member_id) values(3,6);
+   insert into likes(message_id,member_id) values(3,4);
+   insert into likes(message_id,member_id) values(5,7);  
+   insert into likes(message_id,member_id) values(7,5);
    ```
-   ![6-2](https://user-images.githubusercontent.com/111445341/196945265-8166567e-cc22-42a1-a177-1ad1ef8bc3d8.png)
+   ![6-2(修)](https://user-images.githubusercontent.com/111445341/197185605-8a35327a-3d0b-4bdd-b537-be39d1c2ef29.png)
    
 3. 要能先檢查是否曾經按過讚，然後才將按讚的數量 +1 並且記錄按讚的會員是誰。重覆輸入留言編號2被Ivy按讚，出現無法輸入訊息。
    ```mysql
-   insert into likes(message_id,username) values(2,'Ivy');
+   insert into likes(message_id,member_id) values(2,6);
    ```
-   ![6-3](https://user-images.githubusercontent.com/111445341/196945884-64bc50d9-226f-4e0c-8ace-faff9d434f53.png)
+   ![6-3(修)](https://user-images.githubusercontent.com/111445341/197185753-8ddf4989-01a0-41c7-929b-2eca591b7d24.png)
    
-4. 可以根據留言編號取得該留言有哪些會員按讚，ex.取得留言編號3有哪些會員按讚。
+4. 可以根據留言編號取得該留言有哪些會員按讚，ex.取得留言編號3有哪些會員(username)按讚。
    ```mysql
-   select likes.username 
-   from likes
-   inner join message on message.id = likes.message_id
-   where message.id = 3;
+   select member.username 
+   from member 
+   inner join likes on likes.member_id = member.id 
+   where likes.message_id = 3;
    ```
-   ![6-4](https://user-images.githubusercontent.com/111445341/196946594-e5121d05-c199-4fa4-bf29-c35abbe02551.png)
+   ![6-4(修)](https://user-images.githubusercontent.com/111445341/197186188-554d49dd-b5bb-4716-a1f6-1e3f88cc5378.png)
+   
+   取得留言編號3有哪些會員(name)按讚。
+      ```mysql
+   select member.name 
+   from member 
+   inner join likes on likes.member_id = member.id 
+   where likes.message_id = 3;
+   ```
+   ![6-7](https://user-images.githubusercontent.com/111445341/197186417-405678fc-5245-4a03-91ba-8c097b5b8bfb.png)
 
    取得留言的按讚數量
    ```mysql
