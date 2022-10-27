@@ -5,12 +5,11 @@ from flask import render_template # 載入 render_template 函式
 from flask import session # 載入 sesstion 函式
 from flask import url_for # 載入 url_for 函式
 import mysql.connector # 載入 mysql
-from mysql.connector import errorcode # 載入 mysql 錯誤處理
 
 # 連線到 mysql
 db = mysql.connector.connect(
     user = "root",
-    password = "ThisisElliChuang0829",
+    password = "",
     host = "localhost",
     database = "website",
     buffered = True
