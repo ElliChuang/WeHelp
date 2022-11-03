@@ -191,7 +191,7 @@ def api_member():
                     }) 
 
         # 更新會員姓名 
-        if request.method == "PATCH":
+        elif request.method == "PATCH":
             if "username" in session:
                 newName = request.args.get("newName")
                 connection_object = connection_pool.get_connection()
