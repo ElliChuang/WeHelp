@@ -12,7 +12,7 @@ import json
 # 使用connection pool
 dbconfig = {
     "user" : "root",
-    "password" : "ThisisElliChuang0829",
+    "password" : "",
     "host" : "localhost",
     "database" : "website",
 }
